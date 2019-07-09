@@ -7,7 +7,7 @@ The Events API allows you to retrieve event related data from Blue Matador.
 > Example Request
 
 ```shell
-curl "https://app.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/events?start=2019-03-22T00:00:00Z&end=2019-03-23T00:00:00Z"
+curl "https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/events?start=2019-03-22T00:00:00Z&end=2019-03-23T00:00:00Z"
 ```
 
 > Example Response
@@ -102,7 +102,7 @@ This endpoint retrieves Blue Matador events from an account within a time period
 
 ### HTTP Request
 
-`GET https://app.bluematador.com/ma/api/accounts/<account_id>/events`
+`GET https://api.bluematador.com/ma/api/accounts/<account_id>/events`
 
 ### Path Parameters
 
@@ -123,7 +123,7 @@ project | string | (optional) only get events for a particular project
 > Example Request
 
 ```shell
-curl "https://app.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/counts"
+curl "https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/counts"
 ```
 
 > Example Response
@@ -182,7 +182,7 @@ The Graphs API endpoint returns the counts of events opened and active for each 
 
 ### HTTP Request
 
-`GET https://app.bluematador.com/ma/api/accounts/<account_id>/counts`
+`GET https://api.bluematador.com/ma/api/accounts/<account_id>/counts`
 
 ### Path Parameters
 
