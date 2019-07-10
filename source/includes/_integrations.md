@@ -29,7 +29,7 @@ curl https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be935
         "accessKeyId": "AKIAU6EBUO39S2JQAB03"
       },
       "status": {
-        "lastSuccess": null,
+        "lastSuccess": "2019-03-23T09:01:01Z",
         "lastError": null,
         "recentErrors": []
       },

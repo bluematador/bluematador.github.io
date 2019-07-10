@@ -9,8 +9,6 @@ includes:
   - events
   - integrations
   - notifications
-  - organizations
-  - errors
 
 search: true
 ---
