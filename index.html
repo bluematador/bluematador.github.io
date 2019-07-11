@@ -1,0 +1,1848 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Blue Matador API</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #303030;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#events" class="toc-h1 toc-link" data-title="Events">Events</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-events" class="toc-h2 toc-link" data-title="Get Events">Get Events</a>
+                  </li>
+                  <li>
+                    <a href="#graphs" class="toc-h2 toc-link" data-title="Graphs">Graphs</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#integrations" class="toc-h1 toc-link" data-title="Integrations">Integrations</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-integrations" class="toc-h2 toc-link" data-title="List Integrations">List Integrations</a>
+                  </li>
+                  <li>
+                    <a href="#create-aws-integration" class="toc-h2 toc-link" data-title="Create AWS Integration">Create AWS Integration</a>
+                  </li>
+                  <li>
+                    <a href="#update-aws-integration" class="toc-h2 toc-link" data-title="Update AWS Integration">Update AWS Integration</a>
+                  </li>
+                  <li>
+                    <a href="#disable-an-integration" class="toc-h2 toc-link" data-title="Disable an Integration">Disable an Integration</a>
+                  </li>
+                  <li>
+                    <a href="#enable-an-integration" class="toc-h2 toc-link" data-title="Enable an Integration">Enable an Integration</a>
+                  </li>
+                  <li>
+                    <a href="#delete-an-integration" class="toc-h2 toc-link" data-title="Delete an Integration">Delete an Integration</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#notifications" class="toc-h1 toc-link" data-title="Notifications">Notifications</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-notifications" class="toc-h2 toc-link" data-title="List Notifications">List Notifications</a>
+                  </li>
+                  <li>
+                    <a href="#create-an-email-notification" class="toc-h2 toc-link" data-title="Create an Email Notification">Create an Email Notification</a>
+                  </li>
+                  <li>
+                    <a href="#update-an-email-notification" class="toc-h2 toc-link" data-title="Update an Email Notification">Update an Email Notification</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-pagerduty-notification" class="toc-h2 toc-link" data-title="Create a PagerDuty Notification">Create a PagerDuty Notification</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-pagerduty-notification" class="toc-h2 toc-link" data-title="Update a PagerDuty Notification">Update a PagerDuty Notification</a>
+                  </li>
+                  <li>
+                    <a href="#create-an-opsgenie-notification" class="toc-h2 toc-link" data-title="Create an Opsgenie Notification">Create an Opsgenie Notification</a>
+                  </li>
+                  <li>
+                    <a href="#update-an-opsgenie-notification" class="toc-h2 toc-link" data-title="Update an Opsgenie Notification">Update an Opsgenie Notification</a>
+                  </li>
+                  <li>
+                    <a href="#create-an-sns-notification" class="toc-h2 toc-link" data-title="Create an SNS Notification">Create an SNS Notification</a>
+                  </li>
+                  <li>
+                    <a href="#update-an-sns-notification" class="toc-h2 toc-link" data-title="Update an SNS Notification">Update an SNS Notification</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-victorops-notification" class="toc-h2 toc-link" data-title="Create a VictorOps Notification">Create a VictorOps Notification</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-victorops-notification" class="toc-h2 toc-link" data-title="Update a VictorOps Notification">Update a VictorOps Notification</a>
+                  </li>
+                  <li>
+                    <a href="#severities" class="toc-h2 toc-link" data-title="Severities">Severities</a>
+                  </li>
+                  <li>
+                    <a href="#disable-a-notification" class="toc-h2 toc-link" data-title="Disable a Notification">Disable a Notification</a>
+                  </li>
+                  <li>
+                    <a href="#enable-a-notification" class="toc-h2 toc-link" data-title="Enable a Notification">Enable a Notification</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-notification" class="toc-h2 toc-link" data-title="Delete a Notification">Delete a Notification</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<blockquote>
+<p>Base URL for the API</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>https://api.bluematador.com
+</code></pre>
+<p>Welcome to the <a href="https://www.bluematador.com">Blue Matador</a> API. The API allows you to interact with Blue Matador resources outside of the UI. All endpoints use standard HTTP verbs, authentication, and JSON for request and response bodies.</p>
+<h1 id='authentication'>Authentication</h1>
+<blockquote>
+<p>An example of authenticating with Blue Matador</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"api_endpoint_here"</span>
+  -H <span class="s2">"Authorization: D6bSkilgbSVm8djsMcMkrcD4QbCJ0n35"</span>
+</code></pre>
+<blockquote>
+<p>Make sure to replace <code>D6bSkilgbSVm8djsMcMkrcD4QbCJ0n35</code> with your API key</p>
+</blockquote>
+
+<p>All API endpoints are scoped to an account and require an API key for access. You can retrieve an API key for an account by visiting <a href="https://app.bluematador.com/ur/app#/account/apikeys">the in app page for API keys</a>.</p>
+
+<p>Once you have an API key, you can authenticate calls to Blue Matador by passing your API key as the value for the <code>Authorization</code> header:</p>
+
+<p><code>Authorization: D6bSkilgbSVm8djsMcMkrcD4QbCJ0n35</code></p>
+
+<aside class="notice">Make sure to replace <code>D6bSkilgbSVm8djsMcMkrcD4QbCJ0n35</code> with your API key</aside>
+<h1 id='events'>Events</h1>
+<p>The Events API allows you to retrieve event related data from Blue Matador.</p>
+<h2 id='get-events'>Get Events</h2>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/events?start=2019-03-22T00:00:00Z&amp;end=2019-03-23T00:00:00Z"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+    // id of the event
+    <span class="s2">"id"</span>: <span class="s2">"b97da6af-1f87-4cd1-992f-113a60be9358"</span>,
+    // id of the account
+    <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+    // event opened date
+    <span class="s2">"opened"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+    // event close date <span class="o">(</span>optional<span class="o">)</span>
+    “closed”: null,
+    // enum of the <span class="nb">type </span>of event
+    <span class="s2">"eventType"</span>: <span class="s2">"route53_zone_ns"</span>,
+    // display string <span class="k">for </span><span class="nb">type </span>of event
+    <span class="s2">"typeText"</span>: <span class="s2">"Route53 Zone NS Records"</span>,
+    // display string <span class="k">for </span>event summary
+    <span class="s2">"summaryText"</span>: <span class="s2">"The configured NS records for the zone does not match the actual query response"</span>,
+    // list of additional details about the event
+    <span class="s2">"detailTexts"</span>: <span class="o">[</span>
+      <span class="s2">"ns-1408.awsdns-60.org."</span>,
+      <span class="s2">"ns-1781.awsdns-18.co.uk."</span>,
+      <span class="s2">"ns-31.awsdns-04.com."</span>,
+      <span class="s2">"ns-792.awsdns-26.net."</span>
+    <span class="o">]</span>,
+    // anomaly, warning, alert
+    <span class="s2">"severity"</span>: <span class="s2">"anomaly"</span>,
+    // details about the resource affected by the event
+    <span class="s2">"source"</span>: <span class="o">{</span>
+      // identification data about the resource
+      <span class="s2">"ref"</span>: <span class="o">{</span>
+        <span class="s2">"arn"</span>: <span class="s2">"arn:aws:route53:::hostedzone/Z132S03H3a5QD"</span>,
+        <span class="s2">"refType"</span>: <span class="s2">"aws_arn"</span>
+      <span class="o">}</span><span class="s2">",
+      // a label describing the type of resource
+      "</span>label<span class="s2">": "</span>Route53 Zone<span class="s2">",
+      // a text representation of the resource
+      "</span>text<span class="s2">": "</span>thedevcloud.com.<span class="s2">",
+      // a list of key-value pairs that further identify the resource
+      "</span>tags<span class="s2">": [
+        {
+          "</span>key<span class="s2">": "</span>AWS Account<span class="s2">",
+          "</span>value<span class="s2">": "</span>blue-poc<span class="s2">"
+        },
+        {
+          "</span>key<span class="s2">": "</span>Public<span class="s2">",
+          "</span>value<span class="s2">": "</span><span class="nb">true</span><span class="s2">"
+        },
+        {
+          "</span>key<span class="s2">": "</span>Zone ID<span class="s2">",
+          "</span>value<span class="s2">": "</span>Z132S03H3a5QD<span class="s2">"
+        }
+      ]
+    },
+    // links to event troubleshooting, AWS, and incident management
+    "</span>links<span class="s2">": [
+      {
+        "</span>linkType<span class="s2">": "</span>troubleshooting<span class="s2">",
+        "</span>text<span class="s2">": "</span>Troubleshooting<span class="s2">",
+        "</span>url<span class="s2">": "</span>https://app.bluematador.com/ur/troubleshooting/route53-hosted-zone#ns<span class="s2">",
+        "</span>created<span class="s2">": "</span>2019-03-22T17:11:08.092Z<span class="s2">"
+      },
+      {
+        "</span>linkType<span class="s2">": "</span>aws<span class="s2">",
+        "</span>text<span class="s2">": "</span>AWS Console<span class="s2">",
+        "</span>url<span class="s2">": "</span>https://app.bluematador.com/ur/awsLink?url<span class="o">=</span>https%3A%2F%2Fconsole.aws.amazon.com%2Froute53%2Fhome%23resource-record-sets%3AZ152S03H3I5QD<span class="s2">",
+        "</span>created<span class="s2">": "</span>2019-03-22T17:11:08.092Z<span class="s2">"
+      }
+    ],
+    // a list of projects the event belongs to
+    "</span>projects<span class="s2">": [
+      {
+        "</span>id<span class="s2">": "</span>6f0ac475-4594-4b86-87d7-7f8b0645126a<span class="s2">",
+        "</span>accountId<span class="s2">": "</span>a976a6af-cf87-4dd1-942f-b13a30be9351<span class="s2">",
+        "</span>created<span class="s2">": "</span>2019-02-19T17:41:05Z<span class="s2">",
+        "</span>name<span class="s2">": "</span>Sandbox<span class="s2">"
+      }
+    ],
+    // whether the event was not sent to notification systems
+    "</span>muted<span class="s2">": false,
+    // whether the event should be hidden
+    "</span>hidden<span class="s2">": false
+  },
+…
+]
+</span></code></pre>
+<p>This endpoint retrieves Blue Matador events from an account within a time period</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.bluematador.com/ma/api/accounts/&lt;account_id&gt;/events</code></p>
+<h3 id='path-parameters'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to get events from</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start</td>
+<td>ISO 8601 date</td>
+<td>the open time for the earliest events to retrieve</td>
+</tr>
+<tr>
+<td>end</td>
+<td>ISO 8601 date</td>
+<td>the open time for the latest events to retrieve</td>
+</tr>
+<tr>
+<td>project</td>
+<td>string</td>
+<td>(optional) only get events for a particular project</td>
+</tr>
+</tbody></table>
+<h2 id='graphs'>Graphs</h2>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/counts"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  // an object containing anomaly, warning, alert objects containing
+  // the number of events <span class="k">in </span>that severity opened that day
+  <span class="s2">"opened"</span>: <span class="o">{</span>
+    <span class="s2">"warning"</span>: <span class="o">{</span>
+      <span class="s2">"2019-03-01T00:00:00Z"</span>: 35,
+      <span class="s2">"2019-03-13T00:00:00Z"</span>: 43,
+      <span class="s2">"2019-03-06T00:00:00Z"</span>: 28,
+      ...
+    <span class="o">}</span>,
+    <span class="s2">"anomaly"</span>: <span class="o">{</span>
+      <span class="s2">"2019-03-01T00:00:00Z"</span>: 52,
+      <span class="s2">"2019-03-13T00:00:00Z"</span>: 45,
+      <span class="s2">"2019-03-06T00:00:00Z"</span>: 33,
+      ...
+    <span class="o">}</span>,
+    <span class="s2">"alert"</span>: <span class="o">{</span>
+      <span class="s2">"2019-03-01T00:00:00Z"</span>: 0,
+      <span class="s2">"2019-03-13T00:00:00Z"</span>: 1,
+      <span class="s2">"2019-03-06T00:00:00Z"</span>: 0,
+      ...
+    <span class="o">}</span>
+  <span class="o">}</span>,
+  // an object containing anomaly, warning, alert objects containing
+  // the number of events <span class="k">in </span>that severity active that day
+  <span class="s2">"active"</span>: <span class="o">{</span>
+    <span class="s2">"warning"</span>: <span class="o">{</span>
+      <span class="s2">"2019-03-01T00:00:00Z"</span>: 45,
+      <span class="s2">"2019-03-13T00:00:00Z"</span>: 51,
+      <span class="s2">"2019-03-06T00:00:00Z"</span>: 35,
+      ...
+    <span class="o">}</span>,
+    <span class="s2">"anomaly"</span>: <span class="o">{</span>
+      <span class="s2">"2019-03-01T00:00:00Z"</span>: 59,
+      <span class="s2">"2019-03-13T00:00:00Z"</span>: 52,
+      <span class="s2">"2019-03-06T00:00:00Z"</span>: 41,
+      ...
+    <span class="o">}</span>,
+    <span class="s2">"alert"</span>: <span class="o">{</span>
+      <span class="s2">"2019-03-01T00:00:00Z"</span>: 12,
+      <span class="s2">"2019-03-13T00:00:00Z"</span>: 13,
+      <span class="s2">"2019-03-06T00:00:00Z"</span>: 12,
+      ...
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+<p>The Graphs API endpoint returns the counts of events opened and active for each day in the last 30 days for an account.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.bluematador.com/ma/api/accounts/&lt;account_id&gt;/counts</code></p>
+<h3 id='path-parameters-2'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to get counts from</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project</td>
+<td>string</td>
+<td>(optional) only get counts for a particular project</td>
+</tr>
+</tbody></table>
+<h1 id='integrations'>Integrations</h1>
+<p>The Integrations API allows you to interact with integrations. Integrations are the sources of data monitored by Blue Matador.</p>
+<h2 id='list-integrations'>List Integrations</h2>
+<blockquote>
+<p>List Integrations Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+    <span class="s2">"id"</span>: <span class="s2">"d37da6af-1f87-4cd1-992f-113a60be9358"</span>,
+    <span class="s2">"inboundType"</span>: <span class="s2">"aws"</span>,
+    <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+    <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+    <span class="s2">"data"</span>: <span class="o">{</span>
+      <span class="s2">"name"</span>: <span class="s2">"Prod AWS"</span>,
+      <span class="s2">"accountId"</span>: <span class="s2">"50484629850"</span>, // AWS account ID
+      <span class="s2">"keyType"</span>: <span class="s2">"aws"</span>,
+      // non-sensitive key parts only
+      <span class="s2">"keys"</span>: <span class="o">{</span>
+        <span class="s2">"accessKeyId"</span>: <span class="s2">"AKIAU6EBUO39S2JQAB03"</span>
+      <span class="o">}</span>,
+      <span class="s2">"status"</span>: <span class="o">{</span>
+        <span class="s2">"lastSuccess"</span>: <span class="s2">"2019-03-23T09:01:01Z"</span>,
+        <span class="s2">"lastError"</span>: null,
+        <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+      <span class="o">}</span>,
+    <span class="o">}</span>
+  <span class="o">}</span>,
+  ...
+<span class="o">]</span>
+</code></pre>
+<p>Lists all integrations for an account.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds</code></p>
+<h2 id='create-aws-integration'>Create AWS Integration</h2>
+<blockquote>
+<p>Create AWS Integration Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod AWS",
+    "accessKeyId": "AKIAU6EBUO39S2JQAB03",
+    "secretAccessKey": "Zx4xOm4ioTc0f3ylhGZkSSBp4P2M1KpcNlV2Uoe1"
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/aws"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"d37da6af-1f87-4cd1-992f-113a60be9358"</span>,
+  <span class="s2">"inboundType"</span>: <span class="s2">"aws"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod AWS"</span>,
+    <span class="s2">"accountId"</span>: <span class="s2">"50484629850"</span>, // AWS account ID
+    <span class="s2">"keyType"</span>: <span class="s2">"aws"</span>,
+    // non-sensitive key parts only
+    <span class="s2">"keys"</span>: <span class="o">{</span>
+      <span class="s2">"accessKeyId"</span>: <span class="s2">"AKIAU6EBUO39S2JQAB03"</span>
+    <span class="o">}</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: null,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint creates a new AWS integration.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/aws</code></p>
+<h3 id='path-parameters'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to create an integration for</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request Body</h3>
+<p>The AWS integration can authenticate with either IAM users or IAM roles, and the shape of your request payload determines which type of authentication will be used.</p>
+<h4 id='iam-user-authentication'>IAM User Authentication</h4>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new integration</td>
+</tr>
+<tr>
+<td>accessKeyId</td>
+<td>string</td>
+<td>the Access Key ID of the IAM user to authenticate as</td>
+</tr>
+<tr>
+<td>secretAccessKey</td>
+<td>string</td>
+<td>the secret for the access key</td>
+</tr>
+</tbody></table>
+<h4 id='iam-role-assumption'>IAM Role Assumption</h4>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Descirption</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new integration</td>
+</tr>
+<tr>
+<td>roleArn</td>
+<td>string</td>
+<td>the ARN for the IAM role to assume</td>
+</tr>
+<tr>
+<td>externalId</td>
+<td>string</td>
+<td>a string used as the external ID when assuming the role</td>
+</tr>
+</tbody></table>
+<h2 id='update-aws-integration'>Update AWS Integration</h2>
+<blockquote>
+<p>Update AWS Integration Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod AWS",
+    "accessKeyId": "AKIAU5EBCO39SDJQAB01",
+    "secretAccessKey": "1x4xCm4ioTc0f3ylhGZtSSBp4P2M1npcNlV2Uoec"
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/aws/d37da6af-1f87-4cd1-992f-113a60be9358"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"d37da6af-1f87-4cd1-992f-113a60be9358"</span>,
+  <span class="s2">"inboundType"</span>: <span class="s2">"aws"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod AWS"</span>,
+    <span class="s2">"accountId"</span>: <span class="s2">"10384429840"</span>, // AWS account ID
+    <span class="s2">"keyType"</span>: <span class="s2">"aws"</span>,
+    // non-sensitive key parts only
+    <span class="s2">"keys"</span>: <span class="o">{</span>
+      <span class="s2">"accessKeyId"</span>: <span class="s2">"AKIAU5EBCO39SDJQAB01"</span>
+    <span class="o">}</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: <span class="s2">"2019-03-23T09:01:01Z"</span>,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint updates an existing AWS integration.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/aws/&lt;id&gt;</code></p>
+<h3 id='path-parameters-2'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the integration</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the id of the integration to update</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-2'>Request Body</h3>
+<p>The AWS integration can authenticate with either IAM users or IAM roles, and the shape of your request payload determines which type of authentication will be used.</p>
+<h4 id='iam-user-authentication-2'>IAM User Authentication</h4>
+<p>If you are only updating the name of the integration, you can omit credentials.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new integration</td>
+</tr>
+<tr>
+<td>accessKeyId</td>
+<td>string</td>
+<td>(optional) the Access Key ID of the IAM user to authenticate as</td>
+</tr>
+<tr>
+<td>secretAccessKey</td>
+<td>string</td>
+<td>(optional) the secret for the access key</td>
+</tr>
+</tbody></table>
+<h4 id='iam-role-assumption-2'>IAM Role Assumption</h4>
+<p>If you are only updating the name of the integration, you can omit credentials.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new integration</td>
+</tr>
+<tr>
+<td>roleArn</td>
+<td>string</td>
+<td>(optional) the ARN for the IAM role to assume</td>
+</tr>
+<tr>
+<td>externalId</td>
+<td>string</td>
+<td>(optional) a string used as the external ID when assuming the role</td>
+</tr>
+</tbody></table>
+<h2 id='disable-an-integration'>Disable an Integration</h2>
+<blockquote>
+<p>Disable Integration Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/d37da6af-1f87-4cd1-992f-113a60be9358/disable"</span>
+</code></pre>
+<blockquote>
+<p>The endpoint returns 200 OK when successful</p>
+</blockquote>
+
+<p>This endpoint allows you to disable an integration. Disabled integrations are not monitored by Blue Matador.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/&lt;id&gt;/disable</code></p>
+<h3 id='path-parameters-3'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the integration</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the id of the integration to disable</td>
+</tr>
+</tbody></table>
+<h2 id='enable-an-integration'>Enable an Integration</h2>
+<blockquote>
+<p>Enable Integration Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/d37da6af-1f87-4cd1-992f-113a60be9358/disable"</span>
+</code></pre>
+<blockquote>
+<p>The endpoint returns 200 OK when successful</p>
+</blockquote>
+
+<p>This endpoint allows you to re-enable an integration.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/&lt;id&gt;/enable</code></p>
+<h3 id='path-parameters-4'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the integration</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the id of the integration to enable</td>
+</tr>
+</tbody></table>
+<h2 id='delete-an-integration'>Delete an Integration</h2>
+<blockquote>
+<p>Delete Integration Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/d37da6af-1f87-4cd1-992f-113a60be9358"</span>
+</code></pre>
+<blockquote>
+<p>The endpoint returns 200 OK when successful</p>
+</blockquote>
+
+<p>This endpoint allows you to delete an integration.</p>
+
+<aside class="notice">An integration must be disabled before it can be deleted.</aside>
+
+<aside class="warning">This action is permanent. Deleted integrations cannot be recovered.</aside>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>DELETE https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/&lt;id&gt;</code></p>
+<h3 id='path-parameters-5'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the integration</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the id of the integration to delete</td>
+</tr>
+</tbody></table>
+<h1 id='notifications'>Notifications</h1>
+<p>The Notifications API allows you to interact with notification methods. Events detected by Blue Matador are sent through these notification methods.</p>
+<h2 id='list-notifications'>List Notifications</h2>
+<blockquote>
+<p>List Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+    <span class="s2">"id"</span>: <span class="s2">"086e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+    <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+    <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+    <span class="s2">"data"</span>: <span class="o">{</span>
+      <span class="s2">"status"</span>: <span class="o">{</span>
+        <span class="s2">"lastSuccess"</span>: <span class="s2">"2019-03-23T09:01:01Z"</span>,
+        <span class="s2">"lastError"</span>: null,
+        <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+      <span class="o">}</span>,
+      <span class="s2">"severities"</span>: <span class="o">{</span>
+        <span class="s2">"all"</span>: <span class="o">[</span>
+          <span class="s2">"warning"</span>,
+          <span class="s2">"alert"</span>
+        <span class="o">]</span>,
+        <span class="s2">"3833aa2a-de1c-4b48-8722-4ec79fb6c2e4"</span>: <span class="o">[</span>
+          <span class="s2">"warning"</span>
+        <span class="o">]</span>
+      <span class="o">}</span>,
+      <span class="s2">"email"</span>: <span class="s2">"example@example.com"</span>
+    <span class="o">}</span>,
+    <span class="s2">"credentials"</span>: null,
+    <span class="s2">"outboundType"</span>: <span class="s2">"email"</span>
+  <span class="o">}</span>,
+  ...
+<span class="o">]</span>
+</code></pre>
+<p>Lists all notifications for an account. Notification objects differ based on their type.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds</code></p>
+<h2 id='create-an-email-notification'>Create an Email Notification</h2>
+<blockquote>
+<p>Create Email Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "email": "example@example.com",
+    "severities": {
+      "all": ["alert", "warning"],
+    }
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/email"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: null,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[</span>
+        <span class="s2">"warning"</span>,
+        <span class="s2">"alert"</span>
+      <span class="o">]</span>,
+    <span class="o">}</span>,
+    <span class="s2">"email"</span>: <span class="s2">"example@example.com"</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: null,
+  <span class="s2">"outboundType"</span>: <span class="s2">"email"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint creates a new email notification.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/email</code></p>
+<h3 id='path-parameters'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to create a notification for</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>the email address to send notifications to</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+</tbody></table>
+<h2 id='update-an-email-notification'>Update an Email Notification</h2>
+<blockquote>
+<p>Update Email Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "email": "example@example.com",
+    "severities": {
+      "all": ["alert", "warning"],
+    }
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/email/686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: <span class="s2">"2019-03-23T09:01:01Z"</span>,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[</span>
+        <span class="s2">"warning"</span>,
+        <span class="s2">"alert"</span>
+      <span class="o">]</span>,
+    <span class="o">}</span>,
+    <span class="s2">"email"</span>: <span class="s2">"example@example.com"</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: null,
+  <span class="s2">"outboundType"</span>: <span class="s2">"email"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint updates an existing email notification.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/email/&lt;id&gt;</code></p>
+<h3 id='path-parameters-2'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the notification</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the ID of the notification to update</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-2'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>the email address to send notifications to</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-pagerduty-notification'>Create a PagerDuty Notification</h2>
+<blockquote>
+<p>Create PagerDuty Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod PagerDuty",
+    "severities": {
+      "all": ["alert", "warning"],
+    },
+    "account": "example-pagerduty",
+    "serviceName": "example Blue Matador",
+    "serviceKey": "445cce5a3ad04113b4eb810c1b8cfd03"
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/pagerduty"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod Pagerduty"</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: null,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[</span>
+        <span class="s2">"warning"</span>,
+        <span class="s2">"alert"</span>
+      <span class="o">]</span>,
+    <span class="o">}</span>,
+    <span class="s2">"account"</span>: <span class="s2">"example-pagerduty"</span>,
+    <span class="s2">"serviceName"</span>: <span class="s2">"example Blue Matador"</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: <span class="s2">"&lt;secret&gt;"</span>,
+  <span class="s2">"outboundType"</span>: <span class="s2">"pagerduty"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint creates a new PagerDuty notification.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/pagerduty</code></p>
+<h3 id='path-parameters-3'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to create a notification for</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-3'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new notification</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+<tr>
+<td>account</td>
+<td>string</td>
+<td>the name of the PagerDuty account to notify</td>
+</tr>
+<tr>
+<td>serviceName</td>
+<td>string</td>
+<td>the name of the PagerDuty service to notify</td>
+</tr>
+<tr>
+<td>serviceSecret</td>
+<td>string</td>
+<td>the API key for the service</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-pagerduty-notification'>Update a PagerDuty Notification</h2>
+<blockquote>
+<p>Update PagerDuty Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod PagerDuty",
+    "severities": {
+      "all": ["alert", "warning"],
+    },
+    "account": "example-pagerduty",
+    "serviceName": "example Blue Matador"
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/pagerduty/686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod Pagerduty"</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: <span class="s2">"2019-03-23T09:01:01Z"</span>,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[</span>
+        <span class="s2">"warning"</span>,
+        <span class="s2">"alert"</span>
+      <span class="o">]</span>,
+    <span class="o">}</span>,
+    <span class="s2">"account"</span>: <span class="s2">"example-pagerduty"</span>,
+    <span class="s2">"serviceName"</span>: <span class="s2">"example Blue Matador"</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: <span class="s2">"&lt;secret&gt;"</span>,
+  <span class="s2">"outboundType"</span>: <span class="s2">"pagerduty"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint updates an existing PagerDuty notification.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/pagerduty/&lt;id&gt;</code></p>
+<h3 id='path-parameters-4'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the notification</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the ID of the notification to update</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-4'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the notification</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+<tr>
+<td>account</td>
+<td>string</td>
+<td>the name of the PagerDuty account to notify</td>
+</tr>
+<tr>
+<td>serviceName</td>
+<td>string</td>
+<td>the name of the PagerDuty service to notify</td>
+</tr>
+<tr>
+<td>serviceSecret</td>
+<td>string</td>
+<td>(optional) the API key for the service</td>
+</tr>
+</tbody></table>
+<h2 id='create-an-opsgenie-notification'>Create an Opsgenie Notification</h2>
+<blockquote>
+<p>Create Opsgenie Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod Opsgenie",
+    "severities": {
+      "all": ["alert", "warning"],
+    },
+    apikey: "a9e34f4c-c341-1546-b5ea-af1a33aeacf7"
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/opsgenie"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"OpsGenie Prod"</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: null,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: <span class="s2">"&lt;secret&gt;"</span>,
+  <span class="s2">"outboundType"</span>: <span class="s2">"opsgenie"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint creates a new Opsgenie notification.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/opsgenie</code></p>
+<h3 id='path-parameters-5'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to create a notification for</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-5'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new notification</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+<tr>
+<td>apikey</td>
+<td>string</td>
+<td>the apikey from the Opsgenie integration to use</td>
+</tr>
+</tbody></table>
+<h2 id='update-an-opsgenie-notification'>Update an Opsgenie Notification</h2>
+<blockquote>
+<p>Update Opsgenie Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod Opsgenie",
+    "severities": {
+      "all": ["alert", "warning"],
+    }
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/opsgenie/686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"OpsGenie Prod"</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: <span class="s2">"2019-03-23T09:01:01Z"</span>,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: <span class="s2">"&lt;secret&gt;"</span>,
+  <span class="s2">"outboundType"</span>: <span class="s2">"opsgenie"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint updates an existing Opsgenie notification.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/opsgenie/&lt;id&gt;</code></p>
+<h3 id='path-parameters-6'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the notification</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the ID of the notification to update</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-6'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the notification</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+<tr>
+<td>apikey</td>
+<td>string</td>
+<td>(optional) the apikey from the Opsgenie integration to use</td>
+</tr>
+</tbody></table>
+<h2 id='create-an-sns-notification'>Create an SNS Notification</h2>
+<blockquote>
+<p>Create SNS Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod SNS",
+    "severities": {
+      "all": ["alert", "warning"],
+    },
+    "topicArn": "arn:aws:sns:us-east-1:536714378879:oncall",
+    "accessKeyId": "AKIAU6EBUO39S2JQAB03",
+    "secretAccessKey": "Zx4xOm4ioTc0f3ylhGZkSSBp4P2M1KpcNlV2Uoe1"
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/sns"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod SNS"</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: null,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[</span>
+        <span class="s2">"alert"</span>,
+        <span class="s2">"warning"</span>
+      <span class="o">]</span>
+    <span class="o">}</span>,
+    <span class="s2">"topicArn"</span>: <span class="s2">"arn:aws:sns:us-east-1:536714378879:oncall"</span>,
+    <span class="s2">"accessKeyId"</span>: <span class="s2">"AKIAU6EBUO39S2JQAB03"</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: <span class="s2">"&lt;secret&gt;"</span>,
+  <span class="s2">"outboundType"</span>: <span class="s2">"sns"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint creates a new SNS notification.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/sns</code></p>
+<h3 id='path-parameters-7'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to create a notification for</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-7'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new notification</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+<tr>
+<td>topicArn</td>
+<td>string</td>
+<td>the ARN of the SNS topic to send notifications to</td>
+</tr>
+<tr>
+<td>accessKeyId</td>
+<td>string</td>
+<td>the Access Key ID of the IAM user to authenticate as</td>
+</tr>
+<tr>
+<td>secretAccessKey</td>
+<td>string</td>
+<td>the secret for the access key</td>
+</tr>
+</tbody></table>
+<h2 id='update-an-sns-notification'>Update an SNS Notification</h2>
+<blockquote>
+<p>Update SNS Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod SNS",
+    "severities": {
+      "all": ["alert", "warning"],
+    },
+    "topicArn": "arn:aws:sns:us-east-1:536714378879:oncall",
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/sns/686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod SNS"</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: <span class="s2">"2019-03-23T09:01:01Z"</span>,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[</span>
+        <span class="s2">"alert"</span>,
+        <span class="s2">"warning"</span>
+      <span class="o">]</span>
+    <span class="o">}</span>,
+    <span class="s2">"topicArn"</span>: <span class="s2">"arn:aws:sns:us-east-1:536714378879:oncall"</span>,
+    <span class="s2">"accessKeyId"</span>: <span class="s2">"AKIAU6EBUO39S2JQAB03"</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: <span class="s2">"&lt;secret&gt;"</span>,
+  <span class="s2">"outboundType"</span>: <span class="s2">"sns"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint updates an existing SNS notification.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/sns/&lt;id&gt;</code></p>
+<h3 id='path-parameters-8'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the notification</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the ID of the notification to update</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-8'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the notification</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+<tr>
+<td>topicArn</td>
+<td>string</td>
+<td>the ARN of the SNS topic to send notifications to</td>
+</tr>
+<tr>
+<td>accessKeyId</td>
+<td>string</td>
+<td>(optional) the Access Key ID of the IAM user to authenticate as</td>
+</tr>
+<tr>
+<td>secretAccessKey</td>
+<td>string</td>
+<td>(optional) the secret for the access key</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-victorops-notification'>Create a VictorOps Notification</h2>
+<blockquote>
+<p>Create VictorOps Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod VictorOps",
+    "severities": {
+      "all": ["alert", "warning"],
+    },
+    "integrationId": "29a7c0dd-8487-4248-9193-419fc43f03f8",
+    "routingKey": "ops",
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/victorops"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod VictorOps"</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: null,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[</span>
+        <span class="s2">"alert"</span>,
+        <span class="s2">"warning"</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: <span class="s2">"&lt;secret&gt;"</span>,
+  <span class="s2">"outboundType"</span>: <span class="s2">"victorops"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint creates a new VictorOps notification.</p>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/victorops</code></p>
+<h3 id='path-parameters-9'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to create a notification for</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-9'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new notification</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+<tr>
+<td>integrationId</td>
+<td>string</td>
+<td>the ID of the VictorOps integration to send notifications to</td>
+</tr>
+<tr>
+<td>routingKey</td>
+<td>string</td>
+<td>the routing key VictorOps should use</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-victorops-notification'>Update a VictorOps Notification</h2>
+<blockquote>
+<p>Update VictorOps Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod VictorOps",
+    "severities": {
+      "all": ["alert", "warning"],
+    },
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/victorops/686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"686e5a82-3116-4257-8f6b-260ec3fef2cd"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod VictorOps"</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: <span class="s2">"2019-03-23T09:01:01Z"</span>,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+    <span class="s2">"severities"</span>: <span class="o">{</span>
+      <span class="s2">"all"</span>: <span class="o">[</span>
+        <span class="s2">"alert"</span>,
+        <span class="s2">"warning"</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>,
+  <span class="s2">"credentials"</span>: <span class="s2">"&lt;secret&gt;"</span>,
+  <span class="s2">"outboundType"</span>: <span class="s2">"victorops"</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint updates an existing VictorOps notification.</p>
+<h3 id='http-request-11'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/victorops/&lt;id&gt;</code></p>
+<h3 id='path-parameters-10'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the notification</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the ID of the notification to update</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-10'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the notification</td>
+</tr>
+<tr>
+<td>severities</td>
+<td>Object</td>
+<td>a map of <a href="https://www.bluematador.com/docs/project-setup">project</a> to an array of the event types to notify on (<a href="#severities">read more</a>)</td>
+</tr>
+<tr>
+<td>integrationId</td>
+<td>string</td>
+<td>(optional) the ID of the VictorOps integration to send notifications to</td>
+</tr>
+<tr>
+<td>routingKey</td>
+<td>string</td>
+<td>(optional) the routing key VictorOps should use</td>
+</tr>
+</tbody></table>
+<h2 id='severities'>Severities</h2>
+<p>The severities map used when creating notifications allows you to control what types of events are sent to your notification methods. Blue Matador defines three levels of severity, Alert, Warning, and Anomaly. If you have <a href="https://www.bluematador.com/docs/project-setup">set up projects</a>, you can choose which severities you want on a project basis by providing the ID of your project mapped to the severities you&#39;d like sent. For example, the following JSON:</p>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"all"</span>: <span class="o">[</span><span class="s2">"alert"</span><span class="o">]</span>,
+  <span class="s2">"f651a7c4-9d49-4f23-8495-56d8a1d5e97c"</span>: <span class="o">[</span><span class="s2">"alert"</span>, <span class="s2">"warning"</span>, <span class="s2">"anomaly"</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+<p>Would result in all events from resources belonging to the project with the ID <code>f651a7c4-9d49-4f23-8495-56d8a1d5e97c</code> being sent to your notification method. All alerts would also be sent to the notification.</p>
+
+<p>If you haven&#39;t set up projects, your object will only have the <code>all</code> key.</p>
+<h2 id='disable-a-notification'>Disable a Notification</h2>
+<blockquote>
+<p>Disable Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/086e5a82-3116-4257-8f6b-260ec3fef2cd/disable"</span>
+</code></pre>
+<blockquote>
+<p>The endpoint returns 200 OK when successful</p>
+</blockquote>
+
+<p>This endpoint allows you to disable a notification. Disabled notifications will not be used by Blue Matador.</p>
+<h3 id='http-request-12'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/&lt;id&gt;/disable</code></p>
+<h3 id='path-parameters-11'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the notification</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the id of the notification to disable</td>
+</tr>
+</tbody></table>
+<h2 id='enable-a-notification'>Enable a Notification</h2>
+<blockquote>
+<p>Enable Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/086e5a82-3116-4257-8f6b-260ec3fef2cd/disable"</span>
+</code></pre>
+<blockquote>
+<p>The endpoint returns 200 OK when successful</p>
+</blockquote>
+
+<p>This endpoint allows you to re-enable a notification.</p>
+<h3 id='http-request-13'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/&lt;id&gt;/enable</code></p>
+<h3 id='path-parameters-12'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the notification</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the id of the notification to enable</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-notification'>Delete a Notification</h2>
+<blockquote>
+<p>Delete Notification Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/outbounds/086e5a82-3116-4257-8f6b-260ec3fef2cd"</span>
+</code></pre>
+<blockquote>
+<p>The endpoint returns 200 OK when successful</p>
+</blockquote>
+
+<p>This endpoint allows you to delete a notification.</p>
+
+<aside class="notice">A notification must be disabled before it can be deleted.</aside>
+
+<aside class="warning">This action is permanent. Deleted notifications cannot be recovered.</aside>
+<h3 id='http-request-14'>HTTP Request</h3>
+<p><code>DELETE https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/outbounds/&lt;id&gt;</code></p>
+<h3 id='path-parameters-13'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the notification</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the id of the notification to delete</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
