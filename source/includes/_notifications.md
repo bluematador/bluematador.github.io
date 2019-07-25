@@ -700,14 +700,14 @@ routingKey | string | (optional) the routing key VictorOps should use
 
 ## Severities
 
-The severities map used when creating notifications allows you to control what types of events are sent to your notification methods. Blue Matador defines three levels of severity, Alert, Warning, and Anomaly. If you have [set up projects](https://www.bluematador.com/docs/project-setup), you can choose which severities you want on a project basis by providing the ID of your project mapped to the severities you'd like sent. For example, the following JSON:
-
 ```shell
 {
   "all": ["alert"],
   "f651a7c4-9d49-4f23-8495-56d8a1d5e97c": ["alert", "warning", "anomaly"]
 }
 ```
+
+The severities map used when creating notifications allows you to control what types of events are sent to your notification methods. Blue Matador defines three levels of severity, Alert, Warning, and Anomaly. If you have [set up projects](https://www.bluematador.com/docs/project-setup), you can choose which severities you want on a project basis by providing the ID of your project mapped to the severities you'd like sent. For example, the following JSON:
 
 Would result in all events from resources belonging to the project with the ID `f651a7c4-9d49-4f23-8495-56d8a1d5e97c` being sent to your notification method. All alerts would also be sent to the notification.
 
