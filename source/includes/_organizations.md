@@ -350,7 +350,7 @@ curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c
 (no body)
 ```
 
-Lists all users that belong to an organization. The response from this endpoint includes only basic user information and does not show the user's permissions with any accounts or organization. To retrieve those details, use the [Get User](#get-user) endpoint.
+Gets a user that belongs to an organization, that user's organization configuration, and their account configurations.
 
 ### HTTP Request
 
