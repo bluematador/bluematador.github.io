@@ -195,6 +195,41 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#organizations" class="toc-h1 toc-link" data-title="Organizations">Organizations</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#list-accounts" class="toc-h2 toc-link" data-title="List Accounts">List Accounts</a>
+                  </li>
+                  <li>
+                    <a href="#create-account" class="toc-h2 toc-link" data-title="Create Account">Create Account</a>
+                  </li>
+                  <li>
+                    <a href="#list-users" class="toc-h2 toc-link" data-title="List Users">List Users</a>
+                  </li>
+                  <li>
+                    <a href="#invite-user" class="toc-h2 toc-link" data-title="Invite User">Invite User</a>
+                  </li>
+                  <li>
+                    <a href="#get-user" class="toc-h2 toc-link" data-title="Get User">Get User</a>
+                  </li>
+                  <li>
+                    <a href="#update-user" class="toc-h2 toc-link" data-title="Update User">Update User</a>
+                  </li>
+                  <li>
+                    <a href="#delete-user" class="toc-h2 toc-link" data-title="Delete User">Delete User</a>
+                  </li>
+                  <li>
+                    <a href="#set-user-account" class="toc-h2 toc-link" data-title="Set User Account">Set User Account</a>
+                  </li>
+                  <li>
+                    <a href="#delete-user-account" class="toc-h2 toc-link" data-title="Delete User Account">Delete User Account</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
     </div>
     <div class="page-wrapper">
@@ -1729,13 +1764,13 @@
 <td>(optional) the routing key VictorOps should use</td>
 </tr>
 </tbody></table>
-<h2 id='severities'>Severities</h2>
-<p>The severities map used when creating notifications allows you to control what types of events are sent to your notification methods. Blue Matador defines three levels of severity, Alert, Warning, and Anomaly. If you have <a href="https://www.bluematador.com/docs/project-setup">set up projects</a>, you can choose which severities you want on a project basis by providing the ID of your project mapped to the severities you&#39;d like sent. For example, the following JSON:</p>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+<h2 id='severities'>Severities</h2><pre class="highlight shell tab-shell"><code><span class="o">{</span>
   <span class="s2">"all"</span>: <span class="o">[</span><span class="s2">"alert"</span><span class="o">]</span>,
   <span class="s2">"f651a7c4-9d49-4f23-8495-56d8a1d5e97c"</span>: <span class="o">[</span><span class="s2">"alert"</span>, <span class="s2">"warning"</span>, <span class="s2">"anomaly"</span><span class="o">]</span>
 <span class="o">}</span>
 </code></pre>
+<p>The severities map used when creating notifications allows you to control what types of events are sent to your notification methods. Blue Matador defines three levels of severity, Alert, Warning, and Anomaly. If you have <a href="https://www.bluematador.com/docs/project-setup">set up projects</a>, you can choose which severities you want on a project basis by providing the ID of your project mapped to the severities you&#39;d like sent. For example, the following JSON:</p>
+
 <p>Would result in all events from resources belonging to the project with the ID <code>f651a7c4-9d49-4f23-8495-56d8a1d5e97c</code> being sent to your notification method. All alerts would also be sent to the notification.</p>
 
 <p>If you haven&#39;t set up projects, your object will only have the <code>all</code> key.</p>
@@ -1837,6 +1872,588 @@
 <td>id</td>
 <td>UUID</td>
 <td>the id of the notification to delete</td>
+</tr>
+</tbody></table>
+<h1 id='organizations'>Organizations</h1>
+<p>Organizations are a way of managing multiple Blue Matador accounts which each have their own integrations, notification methods, and events. When organizations is enabled, user permissions are managed for all accounts in the organization with a shared set of users.</p>
+
+<aside class="warning">This feature can only be enabled by your account manager.</aside>
+<h2 id='authentication'>Authentication</h2>
+<blockquote>
+<p>An example of authenticating with Blue Matador</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"organization_api_endpoint_here"</span>
+  -H <span class="s2">"Authorization: rha7sn5brxab4kh6a7hbe62q3jq1dpee7khpabcd"</span>
+</code></pre>
+<blockquote>
+<p>Make sure to replace <code>rha7sn5brxab4kh6a7hbe62q3jq1dpee7khpabcd</code> with your organization key</p>
+</blockquote>
+
+<p>All organization endpoints are authenticated using an Organization Key instead of an account API key. Simply pass the organization key in the Authorization header as shown:</p>
+<h2 id='list-accounts'>List Accounts</h2>
+<blockquote>
+<p>List Accounts Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight json-doc tab-json-doc"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="c1">// The ID of this account</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"stripeId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="c1">// The name given to this account</span><span class="w">
+      </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subsidiary 1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"paid"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"trialEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15T00:00:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"assessment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"trialWalled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"projectSettings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="c1">// The ID of the organization this account belongs to</span><span class="w">
+    </span><span class="s2">"organizationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40b59978-7e87-4129-aceb-cf9a98c36c62"</span><span class="p">,</span><span class="w">
+    </span><span class="c1">// Extra data about the organization this account belongs to</span><span class="w">
+    </span><span class="s2">"organizationData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Co."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"stripeId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"paid"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"trialEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15T00:00:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"projectSettings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="c1">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Lists all accounts that belong to an organization</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/accounts</code></p>
+<h3 id='path-parameters'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+</tbody></table>
+<h2 id='create-account'>Create Account</h2>
+<blockquote>
+<p>Create Account Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{"name": "Subsidiary 1"}'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts"</span>
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight json-doc tab-json-doc"><code><span class="p">{</span><span class="w">
+  </span><span class="c1">// The newly created account object</span><span class="w">
+  </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="c1">// The ID of this account</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"stripeId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="c1">// The name given to this account</span><span class="w">
+      </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subsidiary 1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"paid"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"trialEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15T00:00:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"assessment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"trialWalled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"projectSettings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="c1">// The ID of the organization this account belongs to</span><span class="w">
+    </span><span class="s2">"organizationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40b59978-7e87-4129-aceb-cf9a98c36c62"</span><span class="p">,</span><span class="w">
+    </span><span class="c1">// Extra data about the organization this account belongs to</span><span class="w">
+    </span><span class="s2">"organizationData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Co."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"stripeId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"paid"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"trialEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15T00:00:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"projectSettings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="c1">// The automatically created default API key for the account, so you can begin immediately calling the account-specific APIs</span><span class="w">
+  </span><span class="s2">"defaultApiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D6bSkilgbSVm8djsMcMkrcD4QbCJ0n35"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Creates a new account for the organization.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/accounts</code></p>
+<h3 id='path-parameters-2'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>the display name for the account, will populate the <code>company</code> field in the account data</td>
+</tr>
+</tbody></table>
+<h2 id='list-users'>List Users</h2>
+<blockquote>
+<p>List Users Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight json-doc tab-json-doc"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="c1">// The ID of the user</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johnsmith@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="c1">// The last time the user has logged in to Blue Matador</span><span class="w">
+    </span><span class="s2">"lastLogin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"systemPermissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"digestFrequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"weekly"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastDigest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"needsTour"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Lists all users that belong to an organization. The response from this endpoint includes only basic user information and does not show the user&#39;s permissions with any accounts or organization. To retrieve those details, use the <a href="#get-user">Get User</a> endpoint.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users</code></p>
+<h3 id='path-parameters-3'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+</tbody></table>
+<h2 id='invite-user'>Invite User</h2>
+<blockquote>
+<p>Invite User Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "email": "janedoe@example.com",
+    "data": {
+      "permissions": ["user"],
+      "autoProvision": true,
+      "autoProvisionPermissions": ["user"]
+    }
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users"</span>
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">(</span>no body<span class="o">)</span>
+</code></pre>
+<blockquote>
+<p>Example Response: 409 Conflict</p>
+</blockquote>
+<pre class="highlight json-doc tab-json-doc"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a user with this email already exists"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Sends an invitation to a user to join your organization. The user must then check their email and accept the invitation through the link in their email, which leads them through the process of setting up their name and password. Invitations cannot be accepted programmatically on behalf of a user.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users</code></p>
+<h3 id='path-parameters-4'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-2'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>the user&#39;s email address</td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>the user organization settings as described below</td>
+</tr>
+</tbody></table>
+<h3 id='user-organization-settings'>User Organization Settings</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>permissions</td>
+<td>list</td>
+<td>a list of user organization permissions: <code>user</code> and/or <code>admin</code></td>
+</tr>
+<tr>
+<td>autoProvision</td>
+<td>boolean</td>
+<td>if set to true, the user will be provisioned onto all existing and future accounts in the organization</td>
+</tr>
+<tr>
+<td>autoProvisionPermissions</td>
+<td>list</td>
+<td>a list of user account permissions: <code>user</code> and/or <code>admin</code> that the user is provisioned with when autoProvision is <code>true</code></td>
+</tr>
+</tbody></table>
+<h2 id='get-user'>Get User</h2>
+<blockquote>
+<p>Get User Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight json-doc tab-json-doc"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="c1">// Basic user information</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="c1">// The ID of the user</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johnsmith@example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="c1">// The last time the user has logged in to Blue Matador</span><span class="w">
+      </span><span class="s2">"lastLogin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"systemPermissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"digestFrequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"weekly"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastDigest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"needsTour"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="c1">// An object describing this user's permissions and settings in the organization</span><span class="w">
+    </span><span class="s2">"userOrganization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"organizationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40b59978-7e87-4129-aceb-cf9a98c36c62"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="c1">// Permissions the user has with the organization</span><span class="w">
+        </span><span class="s2">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"admin"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="c1">// If true, the user is automatically provisioned onto new organization accounts</span><span class="w">
+        </span><span class="s2">"autoProvision"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="c1">// If autoProvision is set, which permissions the user will have on new accounts</span><span class="w">
+        </span><span class="s2">"autoProvisionPermissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"user"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:00Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="c1">// An array of objects describing the user's permissions on each account they have permissions on</span><span class="w">
+    </span><span class="s2">"userAccounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="c1">// If true, this relationship was created as a result of auto provisioning</span><span class="w">
+          </span><span class="s2">"autoProvisioned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="c1">// The current permissions the user has on this account</span><span class="w">
+          </span><span class="s2">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"admin"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="c1">// The last time the user logged in to this account</span><span class="w">
+        </span><span class="s2">"lastLogin"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01T00:00:00Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example Response: 404 Not Found</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">(</span>no body<span class="o">)</span>
+</code></pre>
+<p>Lists all users that belong to an organization. The response from this endpoint includes only basic user information and does not show the user&#39;s permissions with any accounts or organization. To retrieve those details, use the <a href="#get-user">Get User</a> endpoint.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
+<h3 id='path-parameters-5'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>UUID</td>
+<td>the ID of the user</td>
+</tr>
+</tbody></table>
+<h2 id='update-user'>Update User</h2>
+<blockquote>
+<p>Update User Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "permissions": ["user"],
+    "autoProvision": true,
+    "autoProvisionPermissions": ["user"]
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span>
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">(</span>no body<span class="o">)</span>
+</code></pre>
+<p>Updates a user&#39;s organization permissions.</p>
+
+<aside class="warning">Modifying a user's autoProvision settings does not update their existing permissions with each account in the organization.</aside>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
+<h3 id='path-parameters-6'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>UUID</td>
+<td>the ID of the user</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-3'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>permissions</td>
+<td>list</td>
+<td>a list of user organization permissions: <code>user</code> and/or <code>admin</code></td>
+</tr>
+<tr>
+<td>autoProvision</td>
+<td>boolean</td>
+<td>if set to true, the user will be provisioned onto all existing and future accounts in the organization</td>
+</tr>
+<tr>
+<td>autoProvisionPermissions</td>
+<td>list</td>
+<td>a list of user account permissions: <code>user</code> and/or <code>admin</code> that the user is provisioned with when autoProvision is <code>true</code></td>
+</tr>
+</tbody></table>
+<h2 id='delete-user'>Delete User</h2>
+<blockquote>
+<p>Delete User Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span>
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">(</span>no body<span class="o">)</span>
+</code></pre>
+<p>Deletes a user from your organization. The user will also be deleted from all accounts in your organization that they had access to.</p>
+
+<aside class="warning">This action is permanent. Deleted users cannot be recovered, but the user can be re-invited via their email.</aside>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>DELETE https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
+<h3 id='path-parameters-7'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>UUID</td>
+<td>the ID of the user</td>
+</tr>
+</tbody></table>
+<h2 id='set-user-account'>Set User Account</h2>
+<blockquote>
+<p>Set User Account Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "permissions": ["user", "admin"]
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"</span>
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">(</span>no body<span class="o">)</span>
+</code></pre>
+<p>Sets a user&#39;s permissions with a specific account in your organization. To remove a user&#39;s access to an account in your organization, use the <a href="#delete-user-account">Delete User Account</a> API.</p>
+
+<aside class="notice">A user needs at least the "user" permissions to view data for an account.</aside>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;/accounts/&lt;account_id&gt;</code></p>
+<h3 id='path-parameters-8'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>UUID</td>
+<td>the ID of the user</td>
+</tr>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-4'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>permissions</td>
+<td>list</td>
+<td>a list of user account permissions: <code>user</code> and/or <code>admin</code></td>
+</tr>
+</tbody></table>
+<h2 id='delete-user-account'>Delete User Account</h2>
+<blockquote>
+<p>Delete User Account Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"</span>
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">(</span>no body<span class="o">)</span>
+</code></pre>
+<p>Deletes a user&#39;s permissions with an account, completely removing all access to the account.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>DELETE https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;/accounts/&lt;account_id&gt;</code></p>
+<h3 id='path-parameters-9'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>UUID</td>
+<td>the ID of the user</td>
+</tr>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account</td>
 </tr>
 </tbody></table>
 
