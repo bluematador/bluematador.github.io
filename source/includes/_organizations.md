@@ -30,7 +30,7 @@ All organization endpoints are authenticated using an Organization Key instead o
 > List Accounts Example
 
 ```shell
-curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts
+curl https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts
 ```
 
 > Example Response: 200 OK
@@ -76,7 +76,7 @@ Lists all accounts that belong to an organization
 
 ### HTTP Request
 
-`GET https://api.bluematador.com/zi/organization/<organization_id>/accounts`
+`GET https://api.bluematador.com/zi/organizations/<organization_id>/accounts`
 
 ### Path Parameters
 
@@ -95,7 +95,7 @@ organization_id | UUID | the ID of your organization
 ```shell
 curl -X POST -H "Content-Type: application/json" \
   -d '{"name": "Subsidiary 1"}' \
-  "https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts"
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts"
 ```
 
 > Example Response: 200 OK
@@ -143,7 +143,7 @@ Creates a new account for the organization.
 
 ### HTTP Request
 
-`POST https://api.bluematador.com/zi/organization/<organization_id>/accounts`
+`POST https://api.bluematador.com/zi/organizations/<organization_id>/accounts`
 
 ### Path Parameters
 
@@ -165,7 +165,7 @@ name | string | the display name for the account, will populate the `company` fi
 > List Users Example
 
 ```shell
-curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users
+curl https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users
 ```
 
 > Example Response: 200 OK
@@ -196,7 +196,7 @@ Lists all users that belong to an organization. The response from this endpoint 
 
 ### HTTP Request
 
-`GET https://api.bluematador.com/zi/organization/<organization_id>/users`
+`GET https://api.bluematador.com/zi/organizations/<organization_id>/users`
 
 ### Path Parameters
 
@@ -222,7 +222,7 @@ curl -X POST -H "Content-Type: application/json" \
       "autoProvisionPermissions": ["user"]
     }
   }' \
-  "https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users"
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users"
 ```
 
 > Example Response: 200 OK
@@ -243,7 +243,7 @@ Sends an invitation to a user to join your organization. The user must then chec
 
 ### HTTP Request
 
-`POST https://api.bluematador.com/zi/organization/<organization_id>/users`
+`POST https://api.bluematador.com/zi/organizations/<organization_id>/users`
 
 ### Path Parameters
 
@@ -276,7 +276,7 @@ autoProvisionPermissions | list | a list of user account permissions: `user` and
 > Get User Example
 
 ```shell
-curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477
+curl https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477
 ```
 
 > Example Response: 200 OK
@@ -354,7 +354,7 @@ Gets a user that belongs to an organization, that user's organization configurat
 
 ### HTTP Request
 
-`GET https://api.bluematador.com/zi/organization/<organization_id>/users/<user_id>`
+`GET https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>`
 
 ### Path Parameters
 
@@ -378,7 +378,7 @@ curl -X PUT -H "Content-Type: application/json" \
     "autoProvision": true,
     "autoProvisionPermissions": ["user"]
   }' \
-  "https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"
 ```
 
 > Example Response: 200 OK
@@ -393,7 +393,7 @@ Updates a user's organization permissions.
 
 ### HTTP Request
 
-`POST https://api.bluematador.com/zi/organization/<organization_id>/users/<user_id>`
+`POST https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>`
 
 ### Path Parameters
 
@@ -420,7 +420,7 @@ autoProvisionPermissions | list | a list of user account permissions: `user` and
 > Delete User Example
 
 ```shell
-curl -X DELETE "https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"
+curl -X DELETE "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"
 ```
 
 > Example Response: 200 OK
@@ -435,7 +435,7 @@ Deletes a user from your organization. The user will also be deleted from all ac
 
 ### HTTP Request
 
-`DELETE https://api.bluematador.com/zi/organization/<organization_id>/users/<user_id>`
+`DELETE https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>`
 
 ### Path Parameters
 
@@ -457,7 +457,7 @@ curl -X PUT -H "Content-Type: application/json" \
   -d '{
     "permissions": ["user", "admin"]
   }' \
-  "https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"
 ```
 
 > Example Response: 200 OK
@@ -472,7 +472,7 @@ Sets a user's permissions with a specific account in your organization. To remov
 
 ### HTTP Request
 
-`PUT https://api.bluematador.com/zi/organization/<organization_id>/users/<user_id>/accounts/<account_id>`
+`PUT https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>/accounts/<account_id>`
 
 ### Path Parameters
 
@@ -497,7 +497,7 @@ permissions | list | a list of user account permissions: `user` and/or `admin`
 > Delete User Account Example
 
 ```shell
-curl -X DELETE "https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"
+curl -X DELETE "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"
 ```
 
 > Example Response: 200 OK
@@ -510,7 +510,7 @@ Deletes a user's permissions with an account, completely removing all access to 
 
 ### HTTP Request
 
-`DELETE https://api.bluematador.com/zi/organization/<organization_id>/users/<user_id>/accounts/<account_id>`
+`DELETE https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>/accounts/<account_id>`
 
 ### Path Parameters
 
