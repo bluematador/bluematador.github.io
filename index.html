@@ -1894,7 +1894,7 @@
 <blockquote>
 <p>List Accounts Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts
+<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -1936,7 +1936,7 @@
 </span></code></pre>
 <p>Lists all accounts that belong to an organization</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/accounts</code></p>
+<p><code>GET https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/accounts</code></p>
 <h3 id='path-parameters'>Path Parameters</h3>
 <table><thead>
 <tr>
@@ -1957,7 +1957,7 @@
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="s1">'{"name": "Subsidiary 1"}'</span> <span class="se">\</span>
-  <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts"</span>
+  <span class="s2">"https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts"</span>
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -2001,7 +2001,7 @@
 </span></code></pre>
 <p>Creates a new account for the organization.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/accounts</code></p>
+<p><code>POST https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/accounts</code></p>
 <h3 id='path-parameters-2'>Path Parameters</h3>
 <table><thead>
 <tr>
@@ -2034,7 +2034,7 @@
 <blockquote>
 <p>List Users Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users
+<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -2061,7 +2061,7 @@
 </span></code></pre>
 <p>Lists all users that belong to an organization. The response from this endpoint includes only basic user information and does not show the user&#39;s permissions with any accounts or organization. To retrieve those details, use the <a href="#get-user">Get User</a> endpoint.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users</code></p>
+<p><code>GET https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users</code></p>
 <h3 id='path-parameters-3'>Path Parameters</h3>
 <table><thead>
 <tr>
@@ -2089,7 +2089,7 @@
       "autoProvisionPermissions": ["user"]
     }
   }'</span> <span class="se">\</span>
-  <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users"</span>
+  <span class="s2">"https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users"</span>
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -2105,7 +2105,7 @@
 </span></code></pre>
 <p>Sends an invitation to a user to join your organization. The user must then check their email and accept the invitation through the link in their email, which leads them through the process of setting up their name and password. Invitations cannot be accepted programmatically on behalf of a user.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>POST https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users</code></p>
+<p><code>POST https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users</code></p>
 <h3 id='path-parameters-4'>Path Parameters</h3>
 <table><thead>
 <tr>
@@ -2167,7 +2167,7 @@
 <blockquote>
 <p>Get User Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477
+<pre class="highlight shell tab-shell"><code>curl https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -2240,7 +2240,7 @@
 </code></pre>
 <p>Gets a user that belongs to an organization, that user&#39;s organization configuration, and their account configurations.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
+<p><code>GET https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
 <h3 id='path-parameters-5'>Path Parameters</h3>
 <table><thead>
 <tr>
@@ -2270,7 +2270,7 @@
     "autoProvision": true,
     "autoProvisionPermissions": ["user"]
   }'</span> <span class="se">\</span>
-  <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span>
+  <span class="s2">"https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span>
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -2281,7 +2281,7 @@
 
 <aside class="warning">Modifying a user's autoProvision settings does not update their existing permissions with each account in the organization.</aside>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>POST https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
+<p><code>POST https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
 <h3 id='path-parameters-6'>Path Parameters</h3>
 <table><thead>
 <tr>
@@ -2329,7 +2329,7 @@
 <blockquote>
 <p>Delete User Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477"</span>
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -2340,7 +2340,7 @@
 
 <aside class="warning">This action is permanent. Deleted users cannot be recovered, but the user can be re-invited via their email.</aside>
 <h3 id='http-request-7'>HTTP Request</h3>
-<p><code>DELETE https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
+<p><code>DELETE https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
 <h3 id='path-parameters-7'>Path Parameters</h3>
 <table><thead>
 <tr>
@@ -2368,7 +2368,7 @@
   -d <span class="s1">'{
     "permissions": ["user", "admin"]
   }'</span> <span class="se">\</span>
-  <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"</span>
+  <span class="s2">"https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"</span>
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -2379,7 +2379,7 @@
 
 <aside class="notice">A user needs at least the "user" permissions to view data for an account.</aside>
 <h3 id='http-request-8'>HTTP Request</h3>
-<p><code>PUT https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;/accounts/&lt;account_id&gt;</code></p>
+<p><code>PUT https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;/accounts/&lt;account_id&gt;</code></p>
 <h3 id='path-parameters-8'>Path Parameters</h3>
 <table><thead>
 <tr>
@@ -2422,7 +2422,7 @@
 <blockquote>
 <p>Delete User Account Example</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.bluematador.com/zi/organization/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"</span>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users/dd0a2a8b-62f2-48b5-8039-75552ff0a477/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351"</span>
 </code></pre>
 <blockquote>
 <p>Example Response: 200 OK</p>
@@ -2431,7 +2431,7 @@
 </code></pre>
 <p>Deletes a user&#39;s permissions with an account, completely removing all access to the account.</p>
 <h3 id='http-request-9'>HTTP Request</h3>
-<p><code>DELETE https://api.bluematador.com/zi/organization/&lt;organization_id&gt;/users/&lt;user_id&gt;/accounts/&lt;account_id&gt;</code></p>
+<p><code>DELETE https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;/accounts/&lt;account_id&gt;</code></p>
 <h3 id='path-parameters-9'>Path Parameters</h3>
 <table><thead>
 <tr>
