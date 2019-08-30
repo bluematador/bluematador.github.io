@@ -115,6 +115,8 @@ name | string | a name used to identify the new integration
 roleArn | string | the ARN for the IAM role to assume
 externalId | string | a string used as the external ID when assuming the role
 
+When using IAM Role authentication, the role must be set up to allow Blue Matador's AWS account as a trusted identity so that Blue Matador can use AssumeRole. Blue Matador's AWS Account ID is: 339597358577
+
 ## Update AWS Integration
 
 > Update AWS Integration Example
