@@ -208,20 +208,20 @@ organization_id | UUID | the ID of your organization
 
 
 
-## Invite User
+## Invite Users
 
-> Invite User Example
+> Invite Users Example
 
 ```shell
 curl -X POST -H "Content-Type: application/json" \
-  -d '{
+  -d '[{
     "email": "janedoe@example.com",
     "data": {
       "permissions": ["user"],
       "autoProvision": true,
       "autoProvisionPermissions": ["user"]
     }
-  }' \
+  }]' \
   "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users"
 ```
 
@@ -393,7 +393,7 @@ Updates a user's organization permissions.
 
 ### HTTP Request
 
-`POST https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>`
+`PUT https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>`
 
 ### Path Parameters
 
@@ -519,3 +519,138 @@ Name | Type | Description
 organization_id | UUID | the ID of your organization
 user_id | UUID | the ID of the user
 account_id | UUID | the ID of the account
+
+
+
+
+
+
+## List Keys
+
+> List Keys Example
+
+```shell
+curl https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/keys
+```
+
+> Example Response: 200 OK
+
+```json-doc
+[
+  {
+    // The ID of the key
+    "id": "d0a2a8b-62f2-48b5-8039-75552ff0a470",
+    "organizationId": "81571a5d-d913-436b-bc85-1c3ef51ae31f",
+    "key": "9jhdeq3pem5oci22quu05a1fcn8s1joq0c3l1899",
+    "name": "default",
+    "created": "2019-08-26T21:04:39Z",
+    "deactivatedAt": null
+  }, {
+    // The ID of the key
+    "id": "d0a2a8b-62f2-48b5-7039-75552ddda471",
+    "organizationId": "81571a5d-d913-436b-bc85-1c3ef51ae31f",
+    "key": "89eedlc7v6d8vqvatbuiue716mfn694k8p9cim36",
+    "name": "test key",
+    "created": "2019-09-10T20:23:25Z",
+    "deactivatedAt": null
+  }
+]
+```
+
+Lists all keys that belong to an organization.
+
+### HTTP Request
+
+`GET https://api.bluematador.com/zi/organizations/<organization_id>/keys`
+
+### Path Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+organization_id | UUID | the ID of your organization
+
+
+
+
+## Create Key
+
+> Create Key Example
+
+```shell
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"name": "Key 4"}' \
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/keys"
+```
+
+> Example Response: 200 OK
+
+```json-doc
+{
+	"id": "6f452eaa-e7b0-41ac-9453-bc8ec460a807",
+	"organizationId": "81571a5d-d913-436b-bc85-1c3ef51ae31f",
+	"key": "g7935k662equfk6obgibh3olvf70935jjmisdrfj",
+	"name": "Key 5",
+	"created": "2019-09-11T22:19:07Z",
+	"deactivatedAt": null
+}
+```
+
+Creates a new key for the organization.
+
+### HTTP Request
+
+`POST https://api.bluematador.com/zi/organizations/<organization_id>/keys`
+
+### Path Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+organization_id | UUID | the ID of your organization
+
+### Request Body
+
+Name | Type | Description
+---- | ---- | -----------
+name | string | the display name for the key
+
+
+
+
+## Update Key Status
+
+> Update Key Example
+
+```shell
+curl -X PUT -H "Content-Type: application/json" \
+  -d '{
+    "active": false
+  }' \
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/keys/dd0a2a8b-62f2-48b5-8039-75552ff0a477"
+```
+
+> Example Response: 200 OK
+
+```shell
+(no body)
+```
+
+Updates the status of a key (active/inactive).
+
+### HTTP Request
+
+`PUT https://api.bluematador.com/zi/organizations/<organization_id>/keys/<key_id>`
+
+### Path Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+organization_id | UUID | the ID of your organization
+key_id | UUID | the ID of the key
+
+### Request Body
+
+Name | Type | Description
+---- | ---- | -----------
+active | boolean | true to activate, false to deactivate
+
+
