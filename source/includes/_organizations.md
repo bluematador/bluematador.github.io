@@ -160,6 +160,34 @@ name | string | the display name for the account, will populate the `company` fi
 
 
 
+
+## Delete Account
+
+> Delete Account Example
+
+```shell
+curl -X DELETE \
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts/40b59978-7e32-4129-aceb-cf9a98c36c58"
+```
+
+> Example Response: 200 OK
+
+
+Deletes an account
+
+### HTTP Request
+
+`DELETE https://api.bluematador.com/zi/organizations/<organization_id>/accounts/<account_id>`
+
+### Path Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+organization_id | UUID | the ID of your organization
+account_id | UUID | the ID of the account
+
+
+
 ## List Users
 
 > List Users Example
