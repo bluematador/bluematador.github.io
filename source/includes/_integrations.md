@@ -194,6 +194,135 @@ name | string | a name used to identify the new integration
 roleArn | string | (optional) the ARN for the IAM role to assume
 externalId | string | (optional) a string used as the external ID when assuming the role
 
+## Create Azure Integration
+
+> Create Azure Integration Example
+
+```shell
+curl -X POST  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Prod Azure Subscription",
+    "subscriptionId": "c37da5a1-bf17-9cd0-092e-b13360be9355",
+    "tenantId": "6678a6aa-cf84-6c11-d95f-517a60be0351",
+    "applicationId": "16b8a699-468c-cc44-195d-a12a628e8352",
+    "secret": "-5eF10S0Cu7[h?AAa4nscA?19?5c+2.Zs"
+  }' \
+  "https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/azure"
+```
+
+> Example Response
+
+```shell
+{
+  "accountId": "a976a6af-cf87-4dd1-942f-b13a30be9351",
+  "id": "d37da6af-1f87-4cd1-992f-113a60be9358",
+  "inboundType": "azure",
+  "created": "2019-03-22T15:07:08Z",
+  "enabled": true,
+  "data": {
+    "name": "Prod Azure Subscription",
+    "subscriptionId": "c37da5a1-bf17-9cd0-092e-b13360be9355",
+    "tenantId": "6678a6aa-cf84-6c11-d95f-517a60be0351",
+    // non-sensitive key parts only
+    "keys": {
+      "applicationId": "16b8a699-468c-cc44-195d-a12a628e8352"
+    },
+    "status": {
+      "lastSuccess": null,
+      "lastError": null,
+      "recentErrors": []
+    },
+  }
+}
+```
+
+This endpoint creates a new Azure integration. Authentication for the Azure is handled through app registrations in active directory.
+
+### HTTP Request
+
+`POST https://api.bluematador.com/zi/accounts/<account_id>/inbounds/azure`
+
+### Path Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+account_id | UUID | the ID of the account to create an integration for
+
+### Request Body
+
+Name | Type | Description
+---- | ---- | -----------
+name | string | a name used to identify the new integration
+subscriptionId | uuid | the ID of the subscription to be monitored
+tenantId | uuid | the ID of the active directory containing the Blue Matador app registration
+applicationId | uuid | the ID of the app registration
+secret | string | the client secret
+
+## Update Azure Integration
+
+> Update Azure Integration Example
+
+```shell
+curl -X PUT  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Prod Azure Subscription",
+    "subscriptionId": "c37da5a1-bf17-9cd0-092e-b13360be9355",
+    "tenantId": "6678a6aa-cf84-6c11-d95f-517a60be0351",
+    "applicationId": "16b8a699-468c-cc44-195d-a12a628e8352",
+    "secret": "-5eF10S0Cu7[h?AAa4nscA?19?5c+2.Zs"
+  }' \
+  "https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/azure/d37da6af-1f87-4cd1-992f-113a60be9358"
+```
+
+> Example Response
+
+```shell
+{
+  "accountId": "a976a6af-cf87-4dd1-942f-b13a30be9351",
+  "id": "d37da6af-1f87-4cd1-992f-113a60be9358",
+  "inboundType": "azure",
+  "created": "2019-03-22T15:07:08Z",
+  "enabled": true,
+  "data": {
+    "name": "Prod Azure Subscription",
+    "subscriptionId": "c37da5a1-bf17-9cd0-092e-b13360be9355",
+    "tenantId": "6678a6aa-cf84-6c11-d95f-517a60be0351",
+    // non-sensitive key parts only
+    "keys": {
+      "applicationId": "16b8a699-468c-cc44-195d-a12a628e8352"
+    },
+    "status": {
+      "lastSuccess": null,
+      "lastError": null,
+      "recentErrors": []
+    },
+  }
+}
+```
+
+This endpoint updates an existing Azure integration.
+
+### HTTP Request
+
+`PUT https://api.bluematador.com/zi/accounts/<account_id>/inbounds/azure/<id>`
+
+### Path Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+account_id | UUID | the ID of the account that owns the integration
+id | UUID | the id of the integration to update
+
+### Request Body
+
+Name | Type | Description
+---- | ---- | -----------
+name | string | a name used to identify the new integration
+subscriptionId | uuid | (optional) the ID of the subscription to be monitored
+tenantId | uuid | (optional) the ID of the active directory containing the Blue Matador app registration
+applicationId | uuid | (optional) the ID of the app registration
+secret | string | (optional) the client secret
+
 ## Disable an Integration
 
 > Disable Integration Example
