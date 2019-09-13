@@ -167,7 +167,7 @@ name | string | the display name for the account, will populate the `company` fi
 
 ```shell
 curl -X DELETE \
-  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts/40b59978-7e32-4129-aceb-cf9a98c36c58"
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts/be9bba82-c394-431e-8d77-77cb242b138b"
 ```
 
 > Example Response: 200 OK
