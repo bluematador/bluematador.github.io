@@ -135,6 +135,12 @@
                     <a href="#update-aws-integration" class="toc-h2 toc-link" data-title="Update AWS Integration">Update AWS Integration</a>
                   </li>
                   <li>
+                    <a href="#create-azure-integration" class="toc-h2 toc-link" data-title="Create Azure Integration">Create Azure Integration</a>
+                  </li>
+                  <li>
+                    <a href="#update-azure-integration" class="toc-h2 toc-link" data-title="Update Azure Integration">Update Azure Integration</a>
+                  </li>
+                  <li>
                     <a href="#disable-an-integration" class="toc-h2 toc-link" data-title="Disable an Integration">Disable an Integration</a>
                   </li>
                   <li>
@@ -208,10 +214,13 @@
                     <a href="#create-account" class="toc-h2 toc-link" data-title="Create Account">Create Account</a>
                   </li>
                   <li>
+                    <a href="#delete-account" class="toc-h2 toc-link" data-title="Delete Account">Delete Account</a>
+                  </li>
+                  <li>
                     <a href="#list-users" class="toc-h2 toc-link" data-title="List Users">List Users</a>
                   </li>
                   <li>
-                    <a href="#invite-user" class="toc-h2 toc-link" data-title="Invite User">Invite User</a>
+                    <a href="#invite-users" class="toc-h2 toc-link" data-title="Invite Users">Invite Users</a>
                   </li>
                   <li>
                     <a href="#get-user" class="toc-h2 toc-link" data-title="Get User">Get User</a>
@@ -742,6 +751,191 @@
 <td>(optional) a string used as the external ID when assuming the role</td>
 </tr>
 </tbody></table>
+<h2 id='create-azure-integration'>Create Azure Integration</h2>
+<blockquote>
+<p>Create Azure Integration Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod Azure Subscription",
+    "subscriptionId": "c37da5a1-bf17-9cd0-092e-b13360be9355",
+    "tenantId": "6678a6aa-cf84-6c11-d95f-517a60be0351",
+    "applicationId": "16b8a699-468c-cc44-195d-a12a628e8352",
+    "secret": "-5eF10S0Cu7[h?AAa4nscA?19?5c+2.Zs"
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/azure"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"d37da6af-1f87-4cd1-992f-113a60be9358"</span>,
+  <span class="s2">"inboundType"</span>: <span class="s2">"azure"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod Azure Subscription"</span>,
+    <span class="s2">"subscriptionId"</span>: <span class="s2">"c37da5a1-bf17-9cd0-092e-b13360be9355"</span>,
+    <span class="s2">"tenantId"</span>: <span class="s2">"6678a6aa-cf84-6c11-d95f-517a60be0351"</span>,
+    // non-sensitive key parts only
+    <span class="s2">"keys"</span>: <span class="o">{</span>
+      <span class="s2">"applicationId"</span>: <span class="s2">"16b8a699-468c-cc44-195d-a12a628e8352"</span>
+    <span class="o">}</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: null,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint creates a new Azure integration. Authentication for the Azure is handled through app registrations in active directory.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/azure</code></p>
+<h3 id='path-parameters-3'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to create an integration for</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-3'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new integration</td>
+</tr>
+<tr>
+<td>subscriptionId</td>
+<td>uuid</td>
+<td>the ID of the subscription to be monitored</td>
+</tr>
+<tr>
+<td>tenantId</td>
+<td>uuid</td>
+<td>the ID of the active directory containing the Blue Matador app registration</td>
+</tr>
+<tr>
+<td>applicationId</td>
+<td>uuid</td>
+<td>the ID of the app registration</td>
+</tr>
+<tr>
+<td>secret</td>
+<td>string</td>
+<td>the client secret</td>
+</tr>
+</tbody></table>
+<h2 id='update-azure-integration'>Update Azure Integration</h2>
+<blockquote>
+<p>Update Azure Integration Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Prod Azure Subscription",
+    "subscriptionId": "c37da5a1-bf17-9cd0-092e-b13360be9355",
+    "tenantId": "6678a6aa-cf84-6c11-d95f-517a60be0351",
+    "applicationId": "16b8a699-468c-cc44-195d-a12a628e8352",
+    "secret": "-5eF10S0Cu7[h?AAa4nscA?19?5c+2.Zs"
+  }'</span> <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/inbounds/azure/d37da6af-1f87-4cd1-992f-113a60be9358"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"d37da6af-1f87-4cd1-992f-113a60be9358"</span>,
+  <span class="s2">"inboundType"</span>: <span class="s2">"azure"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+  <span class="s2">"enabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"data"</span>: <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"Prod Azure Subscription"</span>,
+    <span class="s2">"subscriptionId"</span>: <span class="s2">"c37da5a1-bf17-9cd0-092e-b13360be9355"</span>,
+    <span class="s2">"tenantId"</span>: <span class="s2">"6678a6aa-cf84-6c11-d95f-517a60be0351"</span>,
+    // non-sensitive key parts only
+    <span class="s2">"keys"</span>: <span class="o">{</span>
+      <span class="s2">"applicationId"</span>: <span class="s2">"16b8a699-468c-cc44-195d-a12a628e8352"</span>
+    <span class="o">}</span>,
+    <span class="s2">"status"</span>: <span class="o">{</span>
+      <span class="s2">"lastSuccess"</span>: null,
+      <span class="s2">"lastError"</span>: null,
+      <span class="s2">"recentErrors"</span>: <span class="o">[]</span>
+    <span class="o">}</span>,
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<p>This endpoint updates an existing Azure integration.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/azure/&lt;id&gt;</code></p>
+<h3 id='path-parameters-4'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account that owns the integration</td>
+</tr>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>the id of the integration to update</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-4'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>a name used to identify the new integration</td>
+</tr>
+<tr>
+<td>subscriptionId</td>
+<td>uuid</td>
+<td>(optional) the ID of the subscription to be monitored</td>
+</tr>
+<tr>
+<td>tenantId</td>
+<td>uuid</td>
+<td>(optional) the ID of the active directory containing the Blue Matador app registration</td>
+</tr>
+<tr>
+<td>applicationId</td>
+<td>uuid</td>
+<td>(optional) the ID of the app registration</td>
+</tr>
+<tr>
+<td>secret</td>
+<td>string</td>
+<td>(optional) the client secret</td>
+</tr>
+</tbody></table>
 <h2 id='disable-an-integration'>Disable an Integration</h2>
 <blockquote>
 <p>Disable Integration Example</p>
@@ -753,9 +947,9 @@
 </blockquote>
 
 <p>This endpoint allows you to disable an integration. Disabled integrations are not monitored by Blue Matador.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/&lt;id&gt;/disable</code></p>
-<h3 id='path-parameters-3'>Path Parameters</h3>
+<h3 id='path-parameters-5'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -785,9 +979,9 @@
 </blockquote>
 
 <p>This endpoint allows you to re-enable an integration.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>PUT https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/&lt;id&gt;/enable</code></p>
-<h3 id='path-parameters-4'>Path Parameters</h3>
+<h3 id='path-parameters-6'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -821,9 +1015,9 @@
 <aside class="notice">An integration must be disabled before it can be deleted.</aside>
 
 <aside class="warning">This action is permanent. Deleted integrations cannot be recovered.</aside>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>DELETE https://api.bluematador.com/zi/accounts/&lt;account_id&gt;/inbounds/&lt;id&gt;</code></p>
-<h3 id='path-parameters-5'>Path Parameters</h3>
+<h3 id='path-parameters-7'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2032,6 +2226,39 @@
 <td>the display name for the account, will populate the <code>company</code> field in the account data</td>
 </tr>
 </tbody></table>
+<h2 id='delete-account'>Delete Account</h2>
+<blockquote>
+<p>Delete Account Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="se">\</span>
+  <span class="s2">"https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts/be9bba82-c394-431e-8d77-77cb242b138b"</span>
+</code></pre>
+<blockquote>
+<p>Example Response: 200 OK</p>
+</blockquote>
+
+<p>Deletes an account</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/accounts/&lt;account_id&gt;</code></p>
+<h3 id='path-parameters-3'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organization_id</td>
+<td>UUID</td>
+<td>the ID of your organization</td>
+</tr>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account</td>
+</tr>
+</tbody></table>
 <h2 id='list-users'>List Users</h2>
 <blockquote>
 <p>List Users Example</p>
@@ -2062,9 +2289,9 @@
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>Lists all users that belong to an organization. The response from this endpoint includes only basic user information and does not show the user&#39;s permissions with any accounts or organization. To retrieve those details, use the <a href="#get-user">Get User</a> endpoint.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users</code></p>
-<h3 id='path-parameters-3'>Path Parameters</h3>
+<h3 id='path-parameters-4'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2078,19 +2305,19 @@
 <td>the ID of your organization</td>
 </tr>
 </tbody></table>
-<h2 id='invite-user'>Invite User</h2>
+<h2 id='invite-users'>Invite Users</h2>
 <blockquote>
-<p>Invite User Example</p>
+<p>Invite Users Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -d <span class="s1">'{
+  -d <span class="s1">'[{
     "email": "janedoe@example.com",
     "data": {
       "permissions": ["user"],
       "autoProvision": true,
       "autoProvisionPermissions": ["user"]
     }
-  }'</span> <span class="se">\</span>
+  }]'</span> <span class="se">\</span>
   <span class="s2">"https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users"</span>
 </code></pre>
 <blockquote>
@@ -2106,9 +2333,9 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Sends an invitation to a user to join your organization. The user must then check their email and accept the invitation through the link in their email, which leads them through the process of setting up their name and password. Invitations cannot be accepted programmatically on behalf of a user.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users</code></p>
-<h3 id='path-parameters-4'>Path Parameters</h3>
+<h3 id='path-parameters-5'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2241,9 +2468,9 @@
 <pre class="highlight shell tab-shell"><code><span class="o">(</span>no body<span class="o">)</span>
 </code></pre>
 <p>Gets a user that belongs to an organization, that user&#39;s organization configuration, and their account configurations.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
-<h3 id='path-parameters-5'>Path Parameters</h3>
+<h3 id='path-parameters-6'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2282,9 +2509,9 @@
 <p>Updates a user&#39;s organization permissions.</p>
 
 <aside class="warning">Modifying a user's autoProvision settings does not update their existing permissions with each account in the organization.</aside>
-<h3 id='http-request-6'>HTTP Request</h3>
-<p><code>POST https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
-<h3 id='path-parameters-6'>Path Parameters</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>PUT https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
+<h3 id='path-parameters-7'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2341,9 +2568,9 @@
 <p>Deletes a user from your organization. The user will also be deleted from all accounts in your organization that they had access to.</p>
 
 <aside class="warning">This action is permanent. Deleted users cannot be recovered, but the user can be re-invited via their email.</aside>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>DELETE https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;</code></p>
-<h3 id='path-parameters-7'>Path Parameters</h3>
+<h3 id='path-parameters-8'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2380,9 +2607,9 @@
 <p>Sets a user&#39;s permissions with a specific account in your organization. To remove a user&#39;s access to an account in your organization, use the <a href="#delete-user-account">Delete User Account</a> API.</p>
 
 <aside class="notice">A user needs at least the "user" permissions to view data for an account.</aside>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>PUT https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;/accounts/&lt;account_id&gt;</code></p>
-<h3 id='path-parameters-8'>Path Parameters</h3>
+<h3 id='path-parameters-9'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2432,9 +2659,9 @@
 <pre class="highlight shell tab-shell"><code><span class="o">(</span>no body<span class="o">)</span>
 </code></pre>
 <p>Deletes a user&#39;s permissions with an account, completely removing all access to the account.</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>DELETE https://api.bluematador.com/zi/organizations/&lt;organization_id&gt;/users/&lt;user_id&gt;/accounts/&lt;account_id&gt;</code></p>
-<h3 id='path-parameters-9'>Path Parameters</h3>
+<h3 id='path-parameters-10'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>

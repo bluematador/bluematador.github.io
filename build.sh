@@ -6,6 +6,6 @@ set -o errexit #abort if any command fails
 # gem upate --system
 # bundle install
 
-sudo bundle exec middleman build --clean
+bundle exec middleman build --clean
 cp -r build/* .
 rm -fr build
