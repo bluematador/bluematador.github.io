@@ -208,20 +208,20 @@ organization_id | UUID | the ID of your organization
 
 
 
-## Invite User
+## Invite Users
 
-> Invite User Example
+> Invite Users Example
 
 ```shell
 curl -X POST -H "Content-Type: application/json" \
-  -d '{
+  -d '[{
     "email": "janedoe@example.com",
     "data": {
       "permissions": ["user"],
       "autoProvision": true,
       "autoProvisionPermissions": ["user"]
     }
-  }' \
+  }]' \
   "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/users"
 ```
 
@@ -393,7 +393,7 @@ Updates a user's organization permissions.
 
 ### HTTP Request
 
-`POST https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>`
+`PUT https://api.bluematador.com/zi/organizations/<organization_id>/users/<user_id>`
 
 ### Path Parameters
 
@@ -519,3 +519,6 @@ Name | Type | Description
 organization_id | UUID | the ID of your organization
 user_id | UUID | the ID of the user
 account_id | UUID | the ID of the account
+
+
+
