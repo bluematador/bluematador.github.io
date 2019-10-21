@@ -4,6 +4,8 @@ title: Blue Matador API
 language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
+  - <a href="https://www.bluematador.com">Blue Matador Home</a>
+  - <a href="https://www.bluematador.com/docs">Blue Matador App Docs</a>
 
 includes:
   - events
