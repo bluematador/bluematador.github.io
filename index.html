@@ -117,7 +117,10 @@
             <a href="#events" class="toc-h1 toc-link" data-title="Events">Events</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-events" class="toc-h2 toc-link" data-title="Get Events">Get Events</a>
+                    <a href="#get-opened-events" class="toc-h2 toc-link" data-title="Get Opened Events">Get Opened Events</a>
+                  </li>
+                  <li>
+                    <a href="#get-active-events" class="toc-h2 toc-link" data-title="Get Active Events">Get Active Events</a>
                   </li>
                   <li>
                     <a href="#graphs" class="toc-h2 toc-link" data-title="Graphs">Graphs</a>
@@ -277,7 +280,7 @@
 <aside class="notice">Make sure to replace <code>D6bSkilgbSVm8djsMcMkrcD4QbCJ0n35</code> with your API key</aside>
 <h1 id='events'>Events</h1>
 <p>The Events API allows you to retrieve event related data from Blue Matador.</p>
-<h2 id='get-events'>Get Events</h2>
+<h2 id='get-opened-events'>Get Opened Events</h2>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -370,7 +373,7 @@
 …
 ]
 </span></code></pre>
-<p>This endpoint retrieves Blue Matador events from an account within a time period</p>
+<p>This endpoint retrieves Blue Matador events from an account that were opened within a time period</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://api.bluematador.com/ma/api/accounts/&lt;account_id&gt;/events</code></p>
 <h3 id='path-parameters'>Path Parameters</h3>
@@ -404,6 +407,140 @@
 <td>end</td>
 <td>ISO 8601 date</td>
 <td>the open time for the latest events to retrieve</td>
+</tr>
+<tr>
+<td>project</td>
+<td>string</td>
+<td>(optional) only get events for a particular project</td>
+</tr>
+</tbody></table>
+<h2 id='get-active-events'>Get Active Events</h2>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/events/active?start=2019-03-22T00:00:00Z&amp;end=2019-03-23T00:00:00Z"</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+    // id of the event
+    <span class="s2">"id"</span>: <span class="s2">"b97da6af-1f87-4cd1-992f-113a60be9358"</span>,
+    // id of the account
+    <span class="s2">"accountId"</span>: <span class="s2">"a976a6af-cf87-4dd1-942f-b13a30be9351"</span>,
+    // event opened date
+    <span class="s2">"opened"</span>: <span class="s2">"2019-03-22T15:07:08Z"</span>,
+    // event close date <span class="o">(</span>optional<span class="o">)</span>
+    “closed”: null,
+    // enum of the <span class="nb">type </span>of event
+    <span class="s2">"eventType"</span>: <span class="s2">"route53_zone_ns"</span>,
+    // display string <span class="k">for </span><span class="nb">type </span>of event
+    <span class="s2">"typeText"</span>: <span class="s2">"Route53 Zone NS Records"</span>,
+    // display string <span class="k">for </span>event summary
+    <span class="s2">"summaryText"</span>: <span class="s2">"The configured NS records for the zone does not match the actual query response"</span>,
+    // list of additional details about the event
+    <span class="s2">"detailTexts"</span>: <span class="o">[</span>
+      <span class="s2">"ns-1408.awsdns-60.org."</span>,
+      <span class="s2">"ns-1781.awsdns-18.co.uk."</span>,
+      <span class="s2">"ns-31.awsdns-04.com."</span>,
+      <span class="s2">"ns-792.awsdns-26.net."</span>
+    <span class="o">]</span>,
+    // anomaly, warning, alert
+    <span class="s2">"severity"</span>: <span class="s2">"anomaly"</span>,
+    // details about the resource affected by the event
+    <span class="s2">"source"</span>: <span class="o">{</span>
+      // identification data about the resource
+      <span class="s2">"ref"</span>: <span class="o">{</span>
+        <span class="s2">"arn"</span>: <span class="s2">"arn:aws:route53:::hostedzone/Z132S03H3a5QD"</span>,
+        <span class="s2">"refType"</span>: <span class="s2">"aws_arn"</span>
+      <span class="o">}</span><span class="s2">",
+      // a label describing the type of resource
+      "</span>label<span class="s2">": "</span>Route53 Zone<span class="s2">",
+      // a text representation of the resource
+      "</span>text<span class="s2">": "</span>thedevcloud.com.<span class="s2">",
+      // a list of key-value pairs that further identify the resource
+      "</span>tags<span class="s2">": [
+        {
+          "</span>key<span class="s2">": "</span>AWS Account<span class="s2">",
+          "</span>value<span class="s2">": "</span>blue-poc<span class="s2">"
+        },
+        {
+          "</span>key<span class="s2">": "</span>Public<span class="s2">",
+          "</span>value<span class="s2">": "</span><span class="nb">true</span><span class="s2">"
+        },
+        {
+          "</span>key<span class="s2">": "</span>Zone ID<span class="s2">",
+          "</span>value<span class="s2">": "</span>Z132S03H3a5QD<span class="s2">"
+        }
+      ]
+    },
+    // links to event troubleshooting, AWS, and incident management
+    "</span>links<span class="s2">": [
+      {
+        "</span>linkType<span class="s2">": "</span>troubleshooting<span class="s2">",
+        "</span>text<span class="s2">": "</span>Troubleshooting<span class="s2">",
+        "</span>url<span class="s2">": "</span>https://app.bluematador.com/ur/troubleshooting/route53-hosted-zone#ns<span class="s2">",
+        "</span>created<span class="s2">": "</span>2019-03-22T17:11:08.092Z<span class="s2">"
+      },
+      {
+        "</span>linkType<span class="s2">": "</span>aws<span class="s2">",
+        "</span>text<span class="s2">": "</span>AWS Console<span class="s2">",
+        "</span>url<span class="s2">": "</span>https://app.bluematador.com/ur/awsLink?url<span class="o">=</span>https%3A%2F%2Fconsole.aws.amazon.com%2Froute53%2Fhome%23resource-record-sets%3AZ152S03H3I5QD<span class="s2">",
+        "</span>created<span class="s2">": "</span>2019-03-22T17:11:08.092Z<span class="s2">"
+      }
+    ],
+    // a list of projects the event belongs to
+    "</span>projects<span class="s2">": [
+      {
+        "</span>id<span class="s2">": "</span>6f0ac475-4594-4b86-87d7-7f8b0645126a<span class="s2">",
+        "</span>accountId<span class="s2">": "</span>a976a6af-cf87-4dd1-942f-b13a30be9351<span class="s2">",
+        "</span>created<span class="s2">": "</span>2019-02-19T17:41:05Z<span class="s2">",
+        "</span>name<span class="s2">": "</span>Sandbox<span class="s2">"
+      }
+    ],
+    // whether the event was not sent to notification systems
+    "</span>muted<span class="s2">": false,
+    // whether the event should be hidden
+    "</span>hidden<span class="s2">": false
+  },
+…
+]
+</span></code></pre>
+<p>This endpoint retrieves Blue Matador events from an account that were active within a time period</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.bluematador.com/ma/api/accounts/&lt;account_id&gt;/events/active</code></p>
+<h3 id='path-parameters-2'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>UUID</td>
+<td>the ID of the account to get events from</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start</td>
+<td>ISO 8601 date</td>
+<td>the time for the earliest events to retrieve</td>
+</tr>
+<tr>
+<td>end</td>
+<td>ISO 8601 date</td>
+<td>the time for the latest events to retrieve</td>
 </tr>
 <tr>
 <td>project</td>
@@ -469,9 +606,9 @@
 
 </code></pre>
 <p>The Graphs API endpoint returns the counts of events opened and active for each day in the last 30 days for an account.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET https://api.bluematador.com/ma/api/accounts/&lt;account_id&gt;/counts</code></p>
-<h3 id='path-parameters-2'>Path Parameters</h3>
+<h3 id='path-parameters-3'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -485,7 +622,7 @@
 <td>the ID of the account to get counts from</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
