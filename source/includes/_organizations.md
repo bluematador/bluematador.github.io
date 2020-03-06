@@ -158,7 +158,36 @@ Name | Type | Description
 name | string | the display name for the account, will populate the `company` field in the account data
 
 
+## Rename Account
 
+> Rename Account Example
+
+```shell
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"name": "Subsidiary 1"}' \
+  "https://api.bluematador.com/zi/organizations/40b59978-7e87-4129-aceb-cf9a98c36c62/accounts/be9bba82-c394-431e-8d77-77cb242b138b/name"
+```
+
+> Example Response: 200 OK
+
+Renames an account in the organization.
+
+### HTTP Request
+
+`PUT https://api.bluematador.com/zi/organizations/<organization_id>/accounts/<account_id>/name`
+
+### Path Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+organization_id | UUID | the ID of your organization
+account_id | UUID | the ID of the account to rename
+
+### Request Body
+
+Name | Type | Description
+---- | ---- | -----------
+name | string | the display name for the account, will populate the `company` field in the account data
 
 
 ## Delete Account
@@ -547,6 +576,3 @@ Name | Type | Description
 organization_id | UUID | the ID of your organization
 user_id | UUID | the ID of the user
 account_id | UUID | the ID of the account
-
-
-
