@@ -421,7 +421,7 @@
 <blockquote>
 <p>Example Request</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/events/active?start=2019-03-22T00:00:00Z&amp;end=2019-03-23T00:00:00Z"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/events/active"</span>
 </code></pre>
 <blockquote>
 <p>Example Response</p>
@@ -510,7 +510,7 @@
 …
 ]
 </span></code></pre>
-<p>This endpoint retrieves Blue Matador events from an account that were active within a time period</p>
+<p>This endpoint retrieves Blue Matador events from an account that are currently active</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://api.bluematador.com/ma/api/accounts/&lt;account_id&gt;/events/active</code></p>
 <h3 id='path-parameters-2'>Path Parameters</h3>
@@ -535,16 +535,6 @@
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>start</td>
-<td>ISO 8601 date</td>
-<td>the time for the earliest events to retrieve</td>
-</tr>
-<tr>
-<td>end</td>
-<td>ISO 8601 date</td>
-<td>the time for the latest events to retrieve</td>
-</tr>
 <tr>
 <td>project</td>
 <td>string</td>
