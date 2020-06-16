@@ -123,7 +123,7 @@ project | string | (optional) only get events for a particular project
 > Example Request
 
 ```shell
-curl "https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/events/active?start=2019-03-22T00:00:00Z&end=2019-03-23T00:00:00Z"
+curl "https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30be9351/events/active"
 ```
 
 > Example Response
@@ -214,7 +214,7 @@ curl "https://api.bluematador.com/ma/api/accounts/a976a6af-cf87-4dd1-942f-b13a30
 ]
 ```
 
-This endpoint retrieves Blue Matador events from an account that were active within a time period
+This endpoint retrieves Blue Matador events from an account that are currently active
 
 ### HTTP Request
 
@@ -230,8 +230,6 @@ account_id | UUID | the ID of the account to get events from
 
 Name | Type | Description
 ---- | ---- | -----------
-start | ISO 8601 date | the time for the earliest events to retrieve
-end | ISO 8601 date | the time for the latest events to retrieve
 project | string | (optional) only get events for a particular project
 
 ## Graphs
